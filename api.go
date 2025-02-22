@@ -79,7 +79,15 @@ func main() {
 	fmt.Println("longitude:", longitude)
 
 	// Construct the URL with the correct formatting for float values.
-	url := fmt.Sprintf("https://api.openweathermap.org/data/3.0/onecall?lat=%f&lon=%f&appid=%s", latitude, longitude, weatherAPIKey)
+	// For now, we're hardcoding this; in the future, these might be environment variables or toggles from the front end.
+	excludeMinutes := true
+	var url string
+
+	if excludeMinutes {
+		url = fmt.Sprintf("https://api.openweathermap.org/data/3.0/onecall?lat=%f&lon=%f&exclude=minutely&appid=%s", latitude, longitude, weatherAPIKey)
+	} else {
+		url = fmt.Sprintf("https://api.openweathermap.org/data/3.0/onecall?lat=%f&lon=%f&appid=%s", latitude, longitude, weatherAPIKey)
+	}
 
 	response, err := apiCall(url)
 	if err != nil {
