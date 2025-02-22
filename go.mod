@@ -1,3 +1,3 @@
 module github.com/WyattLamberth/weather_dash_api
 
-go 1.24.0
+go 1.24

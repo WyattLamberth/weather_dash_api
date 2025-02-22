@@ -1,18 +1,19 @@
 # syntax=docker/dockerfile:1
 
 # Build stage: compile the Go binary.
-FROM golang:1.20 AS builder
+FROM golang:1.24 AS builder
 WORKDIR /app
 
 # Copy go.mod and go.sum to leverage Docker cache.
 COPY go.mod go.sum ./
 RUN go mod download
 
-# Copy the entire source code.
-COPY . .
+# Copy the source code from the src directory.
+COPY src/ ./src/
 
-# Build the binary with CGO disabled.
-RUN CGO_ENABLED=0 GOOS=linux go build -o api .
+# Change to the src directory and build the binary.
+WORKDIR /app/src
+RUN CGO_ENABLED=0 GOOS=linux go build -o /app/api .
 
 # Run stage: use a minimal image.
 FROM alpine:latest
