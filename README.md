@@ -139,7 +139,7 @@ go test ./...
 ```
 
 ## 📝 License
-[MIT License](LICENSE)
+This project is licensed under the [MIT License](LICENSE).
 
 ## 👥 Contributing
 1. Fork the repository
